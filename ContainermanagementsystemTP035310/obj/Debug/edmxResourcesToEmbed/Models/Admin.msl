@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="Database1Model.Agent">
+        <MappingFragment StoreEntitySet="Agent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cargoes">
+      <EntityTypeMapping TypeName="Database1Model.Cargo">
+        <MappingFragment StoreEntitySet="Cargo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="customerid" ColumnName="customerid" />
+          <ScalarProperty Name="warehouseid" ColumnName="warehouseid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="Database1Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shipments">
+      <EntityTypeMapping TypeName="Database1Model.Shipment">
+        <MappingFragment StoreEntitySet="Shipment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="source" ColumnName="source" />
+          <ScalarProperty Name="destination" ColumnName="destination" />
+          <ScalarProperty Name="cargoid" ColumnName="cargoid" />
+          <ScalarProperty Name="departuretime" ColumnName="departuretime" />
+          <ScalarProperty Name="arrivaltime" ColumnName="arrivaltime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="Database1Model.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Warehouses">
+      <EntityTypeMapping TypeName="Database1Model.Warehouse">
+        <MappingFragment StoreEntitySet="Warehouse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

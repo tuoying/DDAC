@@ -1,0 +1,64 @@
+﻿@model ContainermanagementsystemTP034963.Models.Shipment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Shipment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cargoid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cargoid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departuretime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departuretime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.arrivaltime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.arrivaltime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse1.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse1.location)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

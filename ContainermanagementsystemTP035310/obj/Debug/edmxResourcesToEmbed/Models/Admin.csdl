@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="weight" Type="Double" />
+    <Property Name="customerid" Type="Int32" />
+    <Property Name="warehouseid" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Cargo_ToCustomer" FromRole="Cargo" ToRole="Customer" />
+    <NavigationProperty Name="Warehouse" Relationship="Self.FK_Cargo_ToWarehouse" FromRole="Cargo" ToRole="Warehouse" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cargoes" Relationship="Self.FK_Cargo_ToCustomer" FromRole="Customer" ToRole="Cargo" />
+  </EntityType>
+  <EntityType Name="Shipment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="source" Type="Int32" />
+    <Property Name="destination" Type="Int32" />
+    <Property Name="cargoid" Type="Int32" />
+    <Property Name="departuretime" Type="DateTime" Precision="3" />
+    <Property Name="arrivaltime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Warehouse" Relationship="Self.FK_Shipment_ToWarehouse" FromRole="Shipment" ToRole="Warehouse" />
+    <NavigationProperty Name="Warehouse1" Relationship="Self.FK_Shipment_ToWarehouse1" FromRole="Shipment" ToRole="Warehouse" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cargoes" Relationship="Self.FK_Cargo_ToWarehouse" FromRole="Warehouse" ToRole="Cargo" />
+    <NavigationProperty Name="Shipments" Relationship="Self.FK_Shipment_ToWarehouse" FromRole="Warehouse" ToRole="Shipment" />
+    <NavigationProperty Name="Shipments1" Relationship="Self.FK_Shipment_ToWarehouse1" FromRole="Warehouse" ToRole="Shipment" />
+  </EntityType>
+  <Association Name="FK_Cargo_ToCustomer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cargo">
+        <PropertyRef Name="customerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cargo_ToWarehouse">
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+    <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warehouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cargo">
+        <PropertyRef Name="warehouseid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_ToWarehouse">
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warehouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="source" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_ToWarehouse1">
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warehouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="destination" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="Self.Agent" />
+    <EntitySet Name="Cargoes" EntityType="Self.Cargo" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Shipments" EntityType="Self.Shipment" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+    <AssociationSet Name="FK_Cargo_ToCustomer" Association="Self.FK_Cargo_ToCustomer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Cargo" EntitySet="Cargoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cargo_ToWarehouse" Association="Self.FK_Cargo_ToWarehouse">
+      <End Role="Warehouse" EntitySet="Warehouses" />
+      <End Role="Cargo" EntitySet="Cargoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_ToWarehouse" Association="Self.FK_Shipment_ToWarehouse">
+      <End Role="Warehouse" EntitySet="Warehouses" />
+      <End Role="Shipment" EntitySet="Shipments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_ToWarehouse1" Association="Self.FK_Shipment_ToWarehouse1">
+      <End Role="Warehouse" EntitySet="Warehouses" />
+      <End Role="Shipment" EntitySet="Shipments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
